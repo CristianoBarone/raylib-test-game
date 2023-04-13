@@ -16,37 +16,6 @@ unsigned int λ = 0;
 SaveHandler saveHandler;
 Blinker blinker;
 
-void checkForDebugCode(int key) {
-    if (key == 0)
-        return;
-    switch (key) {
-        case 84:
-            followingSequence = true;
-            break;
-        case 69:
-            if (followingSequence && prevKey == 84) {} else followingSequence = false;
-            break;
-        case 82:
-            if (followingSequence && prevKey == 69) {} else followingSequence = false;
-            break;
-        case 80:
-            if (followingSequence && prevKey == 82) {} else followingSequence = false;
-            break;
-        case 72:
-            if (followingSequence && prevKey == 80) {} else followingSequence = false;
-            break;
-        case 73:
-            if (followingSequence && prevKey == 72) {} else followingSequence = false;
-            break;
-        case 83:
-            if (followingSequence && prevKey == 73) {
-                debugMenu = true;
-            } else followingSequence = false;
-            break;
-    }
-    prevKey = key;
-}
-
 void displayScene() {
     switch (scene) {
         case 0:
@@ -81,7 +50,6 @@ int main(void) {
     while (!WindowShouldClose())
     {
         int key = GetKeyPressed();
-        checkForDebugCode(key);
 
         if (blinker.opacity > 1)
             blinker.opacity -= 2;
@@ -130,11 +98,6 @@ int main(void) {
             DrawCircle(blinker.coords.first, blinker.coords.second, blinker.radius, Color{255,255,255,blinker.opacity});
 
             drawMenu();
-
-            if (debugMenu) {
-                DrawFPS(0,0);
-                DrawText(("MOUSE: " + std::to_string(GetMouseX()) +", " + std::to_string(GetMouseY())).c_str(), (w-MeasureText(("MOUSE: " + std::to_string(GetMouseX()) +", " + std::to_string(GetMouseY())).c_str(), 20)), 0, 20, RAYWHITE);
-            }
             
         EndDrawing();
     }
