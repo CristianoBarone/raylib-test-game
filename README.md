@@ -10,6 +10,7 @@ Those are the following:
   - Using λ as a variable name because "it looked slick"
   - Inserting code more than a line long in headers "out of lazyness"
   - Including no Makefile because "I can compile it by typing the same command every time"
+  - Using .h instead of .hpp because "It was shorter to type"
 
 ### Remember that this code was not meant to be published in the first place and thus is far from polished
 
